@@ -1,0 +1,27 @@
+<html>
+    <script>
+    var deDOM = document.getElementsByTagName("html");
+    console.log(deDOM);
+
+    function getFact(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            //xhttp.responseType = "application/json";
+            if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                var response = JSON.parse(xhttp.responseText);
+                document.getElementById("factDisplay").innerHTML += response.fact + "<br>";
+                
+                
+            }
+        };
+        xhttp.open("GET","https://catfact.ninja/fact", true);
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.send();
+        }
+    
+    </script>
+
+    <button onclick="getFact()">New Cat Fact!</button>
+    <div id="factDisplay"></div>
+</html>
