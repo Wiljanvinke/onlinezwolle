@@ -1,0 +1,40 @@
+<!--Unfinished-->
+
+<html>
+    <head>
+        <style>
+            td.water{
+                background-color: gray;
+            }
+            .boot{
+                background-color: gray;
+            }
+        </style>
+        <script>
+            var i;
+            var board = new Array(10);
+            for(i = 0; i < board.length; i++){
+                for(j = 0; j < board.length; j++)
+                    board[i][j] = 'water';
+            }
+            
+            function schieten( bootofwater, vakje ){
+                var deDOM = document.getElementsByTagName("html");
+                console.log(deDOM);
+                console.log(vakje);
+                vakje.style.backgroundColor = 'yellow';
+                alert(vakje.classList[0]);
+            }
+        </script>
+    </head>
+    <body>
+        <table border=1>
+            <tr>
+                <td class=water onclick="schieten('water', this)" >test</td>
+                <td class=boot onclick="schieten('boot', this)" >test</td>
+                <td class=boot onclick="schieten('boot', this)" >test</td>
+                <td class=water onclick="schieten('water', this)" >test</td>
+            </tr>
+        </table>
+    </body>
+</html>
