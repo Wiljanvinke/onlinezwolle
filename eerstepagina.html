@@ -1,2 +1,23 @@
-<h1>eerste titel</h1>
+<script>
+	function mijnFunctie(){
+		alert("Blauw!");
+		document.getElementById("eenid").innerHTML = "jojo";
+		var getal = document.getElementById("eerstegetal").value;
+		document.getElementById("eenid").innerHTML = getal;
+	}
+</script>
+
+<style>
+	h1{
+		background-color:red;
+	}
+	h1#eenid{
+		background-color:blue;
+	}
+</style>
+
+<h1 align="center">eerste titel</h1>
+<h1 onclick="mijnFunctie()" id="eenid">Blauwe titel</h1>
 <h2>tweede titel</h2>
+<input type=text id=eerstegetal> </input>
+<textarea rows=400 style="color:green"> hier gaan we </textarea>

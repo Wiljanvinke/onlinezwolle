@@ -1,0 +1,24 @@
+<script>
+	function calculate(){
+		var getal = parseInt(document.getElementById("eerstegetal").value);
+		var getal2 = parseInt(document.getElementById("tweedegetal").value);
+		//document.getElementById("eenid").innerHTML = getal;
+		
+		alert(getal + getal2);
+	}
+</script>
+
+<style>
+	h1{
+		background-color:red;
+	}
+	h1#eenid{
+		background-color:blue;
+	}
+</style>
+
+<h1 align="center">Rekenmachine</h1>
+<h2>Add two numbers</h2>
+<input type=text id=eerstegetal> </input>
+<input type=text id=tweedegetal> </input>
+<button onclick="calculate()">Add</button>
