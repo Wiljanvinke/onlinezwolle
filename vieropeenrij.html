@@ -1,19 +1,30 @@
 <html>
     <head>
-        <script>
-            const colums = 7;
-            const rows = 6;
-            
-            //function setup(){
-                var table = document.createElement("TABLE");
-                var i;
-                for(i = 0; i < rows; i++){
-                    table.innerHTML = document.createElement("tr");
-                }
-            //}
-        </script>
+        
     </head>
     <body>
-
+        <table id="table"></table>
     </body>
+    <script>
+        const columns = 7;
+        const rows = 6;
+        const fill = "";
+        
+        //setup
+            var table = document.createElement("TABLE");
+            var i;
+            var j;
+            var row;
+            var cell;
+            console.log(table);
+            for(i = 0; i < rows; i++){
+                row = table.insertRow(i);
+                for(j = 0; j < columns; j++){
+                    cell = row.insertCell(j);
+                    cell.innerHTML = fill;
+                }
+            }
+            document.getElementById("table").appendChild(table);
+        
+    </script>
 </html>
