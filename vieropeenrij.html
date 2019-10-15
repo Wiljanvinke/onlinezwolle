@@ -1,30 +1,51 @@
 <html>
     <head>
-        
+        <link rel="stylesheet" type="text/css" href="vieropeenrij.css">
     </head>
+
     <body>
-        <table id="table"></table>
+        <table id="table">
+            <tr>
+
+            </tr>
+        </table>
     </body>
+
     <script>
         const columns = 7;
         const rows = 6;
         const fill = "";
         
         //setup
-            var table = document.createElement("TABLE");
-            var i;
-            var j;
-            var row;
-            var cell;
-            console.log(table);
-            for(i = 0; i < rows; i++){
-                row = table.insertRow(i);
-                for(j = 0; j < columns; j++){
-                    cell = row.insertCell(j);
-                    cell.innerHTML = fill;
-                }
+        var table = document.createElement("TABLE");
+        var i;
+        var j;
+        var row;
+        var cell;
+        var board = [rows][columns];
+        console.log(table);
+        for(i = 0; i < rows; i++){
+            row = table.insertRow(i);
+            for(j = 0; j < columns; j++){
+                cell = row.insertCell(j);
+                cell.id = parseInt(10*i+j);  //geef id
+                cell.className = "column" + j;
+                cell.onmouseover = function(){highlightColumn(this.className)};
+                cell.innerHTML = fill;
             }
-            document.getElementById("table").appendChild(table);
+        }
+        document.getElementById("table").appendChild(table);
+
+        function highlightColumn(columnNumber){
+            var k;
+            var columns = document.getElementsByClassName(columnNumber);
+            console.log(columnNumber);
+            for(k = 0; k < rows; k++){
+                columns[k].style.backgroundColor = 'dimgrey';
+            }
+            
+        }
         
     </script>
+    
 </html>
