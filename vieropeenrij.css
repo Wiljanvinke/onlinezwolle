@@ -13,6 +13,10 @@ td {
     height: 50px;
 }
 
-td:hover{
-    background-color: dimgray;
+td [class^="player0"] {
+    background-color: red;
+}
+
+td [class^="player1"] {
+    background-color: yellow;
 }

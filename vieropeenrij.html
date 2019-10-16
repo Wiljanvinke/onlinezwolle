@@ -9,6 +9,8 @@
 
             </tr>
         </table>
+
+        <h1 id="turnCounter">Turn: 0</h1>
     </body>
 
     <script>
@@ -22,29 +24,140 @@
         var j;
         var row;
         var cell;
-        var board = [rows][columns];
+        //construct board
+        var board = new Array();
+        for (i=0;i<rows;i++) {
+            board[i]=new Array();
+                for (j=0;j<columns;j++) {
+            board[i][j]= -1;
+            }
+        }
+        console.log("BoardTest: " + board);
+        var playerTurn = 0;
         console.log(table);
         for(i = 0; i < rows; i++){
             row = table.insertRow(i);
             for(j = 0; j < columns; j++){
                 cell = row.insertCell(j);
-                cell.id = parseInt(10*i+j);  //geef id
+                if(i == 0){
+                    cell.id = "id0" + j;
+                } else {
+                    cell.id = "id" + parseInt(10*i+j);  //geef id
+                    //console.log(board);
+                    
+                }
                 cell.className = "column" + j;
                 cell.onmouseover = function(){highlightColumn(this.className)};
-                cell.innerHTML = fill;
+                cell.onmouseleave = function(){resetHighlight(this.className)};
+                cell.onclick = function(){addToken(this.id)};
+                cell.innerHTML = cell.id;
+                
             }
         }
         document.getElementById("table").appendChild(table);
 
-        function highlightColumn(columnNumber){
-            var k;
-            var columns = document.getElementsByClassName(columnNumber);
-            console.log(columnNumber);
-            for(k = 0; k < rows; k++){
-                columns[k].style.backgroundColor = 'dimgrey';
+        function highlightColumn(className){
+            //check if occupied
+            if(className.includes(" ")){
+                return;
+                //className = className.slice(0, className.indexOf(" "));
             }
-            
+            var k;
+            var columns = document.getElementsByClassName(className);   
+            //console.log(className);
+            for(k = 0; k < rows; k++){
+                //console.log("BackgroundColor: " + columns[k].style.backgroundColor);
+                if(columns[k].style.backgroundColor == ""){
+                    columns[k].style.backgroundColor += "dimgray";
+                }
+            }
         }
+
+        function resetHighlight(className){
+            //check if occupied
+            if(className.includes(" ")){
+                return;
+                //className = className.slice(0, className.indexOf(" "));
+            }
+            var k;
+            var column = document.getElementsByClassName(className);
+            //console.log(className);
+            for(k = 0; k < rows; k++){
+                if(column[k].style.backgroundColor == "dimgray"){
+                    column[k].removeAttribute("style");
+                }
+            }
+        }
+
+        function addToken(cellID){
+            var thisCell = document.getElementById(cellID);
+            if (columnFull(cellID)){
+                alert("Column full");
+                return;
+            }
+            var lowestCell = document.getElementById(checkLowest(cellID));
+            console.log("Lowestcell: " + lowestCell.id);
+            //var column = thisCell;
+            setCell(lowestCell);
+            resetHighlight(thisCell.className);
+            
+            
+            playerTurn = parseInt((playerTurn + 1) %2);
+            document.getElementById("turnCounter").innerHTML = "Turn: " + playerTurn;
+            //for(x = 0; x < rows; x++) console.log("BoardTest: row " + x + ": " + board[x]);
+        }
+
+        //return cellID
+        function checkLowest(cellID){
+            var thisCell = document.getElementById(cellID);
+            var thisColumnNumber = parseInt(getColumnNumber(thisCell.className));
+            //console.log(thisColumnNumber);
+            var k;
+            for(k = rows - 1; 0 <= k; k--){
+                //console.log("Lowest row: " + k + " column: " + thisColumnNumber);
+                //console.log("Board: " + board[k][thisColumnNumber]);
+                if(board[k][thisColumnNumber] == -1){
+                    return "id" + k + thisColumnNumber;
+                }
+                    
+                
+            }
+
+        }
+
+        function setCell(cell){
+            var cellID = cell.id;
+            var row = cellID.charAt(2);
+            var column = cellID.charAt(3);
+            if(playerTurn==0){
+                board[row][column] = 0;
+                cell.style.backgroundColor = "red";
+            } else {
+                board[row][column] = 1;
+                cell.style.backgroundColor = "yellow";
+            }
+            cell.className += " player" + playerTurn;
+        }
+
+        //return columnNumber
+        function getColumnNumber(className){
+            if(className.includes(" ")){
+                className = className.slice(0, className.indexOf(" "));
+            } return className.substring(6, className.length);
+        }
+        //return boolean
+        function columnFull(cellID){
+            var thisCell = document.getElementById(cellID);
+            var thisColumnNumber = parseInt(getColumnNumber(thisCell.className));
+            var k;
+            for(k = 0; k < rows; k++){
+                if(board[k][thisColumnNumber] == -1){
+                    return false;
+                }
+            }
+            return true;
+        }
+
         
     </script>
     
