@@ -11,50 +11,60 @@
         </table>
 
         <h1 id="turnCounter">Turn: 0</h1>
+        <button onclick="reset()">Reset</button>
     </body>
 
     <script>
         const columns = 7;
         const rows = 6;
         const fill = "";
-        
-        //setup
-        var table = document.createElement("TABLE");
-        var i;
-        var j;
-        var row;
-        var cell;
-        //construct board
-        var board = new Array();
-        for (i=0;i<rows;i++) {
-            board[i]=new Array();
-                for (j=0;j<columns;j++) {
-            board[i][j]= -1;
-            }
-        }
-        console.log("BoardTest: " + board);
+        var board;
         var playerTurn = 0;
-        console.log(table);
-        for(i = 0; i < rows; i++){
-            row = table.insertRow(i);
-            for(j = 0; j < columns; j++){
-                cell = row.insertCell(j);
-                if(i == 0){
-                    cell.id = "id0" + j;
-                } else {
-                    cell.id = "id" + parseInt(10*i+j);  //geef id
-                    //console.log(board);
+
+        reset();
+        //board = localStorage.lastGame;
+
+        //setup
+        function reset(){
+            document.getElementById("table").innerHTML = "";
+            playerTurn = 0;
+            document.getElementById("turnCounter").innerHTML = "Turn: " + playerTurn;
+            var table = document.createElement("TABLE");
+            var i;
+            var j;
+            var row;
+            var cell;
+            //construct board
+            board = new Array();
+            for (i=0;i<rows;i++) {
+                board[i]=new Array();
+                    for (j=0;j<columns;j++) {
+                board[i][j]= -1;
+                }
+            }
+            console.log("BoardTest: " + board);       
+            console.log(table);
+            for(i = 0; i < rows; i++){
+                row = table.insertRow(i);
+                for(j = 0; j < columns; j++){
+                    cell = row.insertCell(j);
+                    if(i == 0){
+                        cell.id = "id0" + j;
+                    } else {
+                        cell.id = "id" + parseInt(10*i+j);  //geef id
+                        //console.log(board);
+                        
+                    }
+                    cell.className = "column" + j;
+                    cell.onmouseover = function(){highlightColumn(this.className)};
+                    cell.onmouseleave = function(){resetHighlight(this.className)};
+                    cell.onclick = function(){addToken(this.id)};
+                    cell.innerHTML = cell.id;
                     
                 }
-                cell.className = "column" + j;
-                cell.onmouseover = function(){highlightColumn(this.className)};
-                cell.onmouseleave = function(){resetHighlight(this.className)};
-                cell.onclick = function(){addToken(this.id)};
-                cell.innerHTML = cell.id;
-                
             }
+            document.getElementById("table").appendChild(table);
         }
-        document.getElementById("table").appendChild(table);
 
         function highlightColumn(className){
             //check if occupied
@@ -107,6 +117,7 @@
             }
             playerTurn = parseInt((playerTurn + 1) %2);
             document.getElementById("turnCounter").innerHTML = "Turn: " + playerTurn;
+            //localStorage.lastGame = JSON.stringify(board);
             //for(x = 0; x < rows; x++) console.log("BoardTest: row " + x + ": " + board[x]);
         }
 
