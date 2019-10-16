@@ -100,8 +100,11 @@
             //var column = thisCell;
             setCell(lowestCell);
             resetHighlight(thisCell.className);
-            
-            
+            var winner = determineWinner();
+            console.log("Winner: " + winner);
+            if(winner != -1){
+                alert("The winner is " + winner + "!");
+            }
             playerTurn = parseInt((playerTurn + 1) %2);
             document.getElementById("turnCounter").innerHTML = "Turn: " + playerTurn;
             //for(x = 0; x < rows; x++) console.log("BoardTest: row " + x + ": " + board[x]);
@@ -158,6 +161,110 @@
             return true;
         }
 
+        //returns boolean
+        function check4Row(){
+            var row;
+            var column;
+            var k, l, m;
+            var connected;
+            for(k = 0; k < rows; k++){
+                for(l = 0; l < (columns - 3); l++){
+                    if(board[k][l] >=0){
+                    connected = 0;
+                        for(m = 1; m < 4; m++){
+                            if(board[k][l] == board[k][l+m]){
+                                connected++;
+                            } else {
+                                break;
+                            }
+                            if (connected == 3){
+                                return true;
+                            }
+                        }
+                    }
+                }    
+            }
+            return false;
+        }
+        
+            //returns boolean
+            function check4Column(){
+            var row;
+            var column;
+            var k, l, m;
+            for(k = 0; k < rows - 3; k++){
+                for(l = 0; l < columns; l++){
+                    if(board[k][l] >=0){
+                    connected = 0;
+                        for(m = 1; m < 4; m++){
+                            if(board[k][l] == board[k+m][l]){
+                                connected++;
+                            } else {
+                                break;
+                            }
+                            if (connected == 3){
+                                return true;
+                            }
+                        }
+                    }
+                }    
+            }
+            return false;
+        }
+
+        //returns boolean       
+        function check4Diagonal(){
+            var row;
+            var column;
+            var k, l, m;
+            for(k = 0; k < rows - 3; k++){
+                for(l = 0; l < columns - 3; l++){
+                    if(board[k][l] >= 0){
+                    connected = 0;
+                        for(m = 1; m < 4; m++){
+                            if(board[k][l] == board[k+m][l+m]){
+                                connected++;
+                            } else {
+                                break;
+                            }
+                            if (connected == 3){
+                                return true;
+                            }
+                        }
+                    }
+                }    
+            }
+            for(k = rows - 1; 0 < k - 3; k--){
+                for(l = 0; l < columns - 3; l++){
+                    if(board[k][l] >= 0){
+                    connected = 0;
+                    for(m = 1; m < 4; m++){
+                        if(board[k][l] == board[k-m][l+m]){
+                            connected++;
+                            } else {
+                                break;
+                            }
+                            if (connected == 3){
+                                return true;
+                            }
+                        }
+                    }
+                }    
+            }
+            return false;
+        }
+
+        //returns the winning player; -1 if no winner        
+        function determineWinner(){
+            var winner;
+            console.log("determinewinnerrow: " + check4Row());
+            if (check4Row() || check4Column() || check4Diagonal()){        
+                return playerTurn;
+            }
+            return -1;
+
+        }
+        
         
     </script>
     
