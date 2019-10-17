@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <style>
+        </style>
+        <script>
+            function saveData(){
+                let players = [];
+                if(localStorage.playerData){
+                    players = JSON.parse(localStorage.getItem("playerData"));
+                }
+                var player = {};
+                player.firstName = document.getElementById("firstName").value;
+                player.lastName = document.getElementById("lastName").value;
+                player.grade = document.getElementById("grade").value;
+                players.push(player);
+                var dataJSON = JSON.stringify(players);
+                localStorage.setItem('playerData', dataJSON);
+                alert("Gelukt!");
+            }
+        </script>
+    </head>
+    <body>
+        First name <input type="text" id="firstName" > <br>
+        Last name <input type="text" id="lastName"> <br>
+        Grade <input type="text" id="grade"> <br>
+        <button onclick="saveData()">Send</button>
+    </body>
+</html>

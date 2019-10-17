@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <style>
+        </style>    
+    </head>
+
+    <body>
+        <div id="playersDiv"></div>
+        <button onclick="reset()">Reset</button>
+    </body>
+
+    <script>
+            getData();
+            function getData(){
+                var players = JSON.parse(localStorage.getItem("playerData"));
+                for(let i = 0; i < players.length; i++){
+                    let para = document.createElement("p"); 
+                    let name = document.createElement("b");
+                    name.innerHTML = players[i].firstName + " " + players[i].lastName;
+                    let grade = document.createElement("p");
+                    grade.innerHTML = players[i].grade;
+                    para.appendChild(name);
+                    para.appendChild(grade);
+                    para.classList.add("playerPara");
+                    document.getElementById("playersDiv").appendChild(para);
+                }
+            }
+
+            function reset(){
+                //document.getElementById("playersDiv").removeChild()
+            }
+        </script>
+</html>

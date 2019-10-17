@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <input type="text" id="input">
+        <button onclick="popup()">Klik hier</button>
+        <button onclick="retrieve()">Retrieve</button>
+    </body>
+
+    <script>
+            function popup(){
+                var ingevuld = document.getElementById("input").value;
+                
+                var mijnObject = {};
+                mijnObject.pietjepuk = ingevuld;
+                mijnObject.voornaam = "Pietje";
+                console.log(mijnObject);
+                var moJSON = JSON.stringify(mijnObject);
+                console.log(moJSON);
+                localStorage.setItem('mijnKey',moJSON);
+                //alert(ingevuld);
+            }
+
+            function retrieve(){
+                var retrieved = JSON.parse(localStorage.getItem('mijnKey'));
+                console.log("retrieved: " + retrieved.pietjepuk);
+                document.getElementById("input").value = retrieved.pietjepuk;
+            }
+        
+    </script>
+</html>
