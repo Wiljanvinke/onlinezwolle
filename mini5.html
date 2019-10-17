@@ -1,0 +1,36 @@
+<html>
+    <button id="buttonA" onclick="doStuff(id)">A</button>
+    <button id="buttonB" onclick="doStuff(id)">B</button>
+    <button id="buttonC" onclick="doStuff(id)">C</button>
+    <button id="buttonD" onclick="doStuff(id)">D</button>
+    <div id="target"></div>
+
+    <script>
+        var a;
+        var b;
+        var c;
+        var d;
+
+        function doStuff(id){
+            var div = document.createElement("div");
+            var button = document.getElementById(id).innerHTML;
+            switch(button){
+                case a:
+                    a = true;
+                    break;
+                case b:
+                    b = true;
+                    break;
+                case c:
+                    c = true;
+                    break;
+                case d:
+                    d = true;
+                    break;
+            }
+            
+            div.innerHTML = "U heeft op knop " + button + " geklikt.";
+            document.getElementById("target").appendChild(div);
+        }
+    </script>
+</html>
