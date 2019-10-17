@@ -4,6 +4,8 @@ table {
     border-spacing: 2px;
     font-size: 24px;
     border-width: 3px;
+    text-align: center;
+    
   }
 
 td {
@@ -11,6 +13,7 @@ td {
     border-style: solid;
     width: 50px;
     height: 50px;
+    
 }
 
 td [class^="player0"] {
