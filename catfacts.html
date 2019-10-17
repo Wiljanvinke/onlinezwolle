@@ -2,7 +2,13 @@
     <script>
     var deDOM = document.getElementsByTagName("html");
     console.log(deDOM);
-
+    var facts = {};
+    facts.counter = 1;
+    facts.string = "";
+    facts.display = "";
+    
+    
+    
     function getFact(){
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -10,18 +16,32 @@
             if (this.readyState == 4 && this.status == 200) {
                 // Typical action to be performed when the document is ready:
                 var response = JSON.parse(xhttp.responseText);
-                document.getElementById("factDisplay").innerHTML += response.fact + "<br>";
-                
-                
+                fact = response.fact + "<br>";
+                facts.display += "Feit " + facts.counter + ": " + fact;
+                document.getElementById("factDisplay").innerHTML = facts.display;
+                facts.counter++;
+                var factsJSON = JSON.stringify(facts);
+                console.log(factsJSON);
+                //localStorage.setItem('catFacts', factsJSON);
             }
-        };
+        }
         xhttp.open("GET","https://catfact.ninja/fact", true);
         xhttp.setRequestHeader("Accept", "application/json");
         xhttp.send();
-        }
+    }
+
+    function retrieve(){/*
+        if(localStorage.getItem("catFacts")){
+            var retrFacts = JSON.parse(localStorage.getItem("catFacts"));
+            facts.display = retrFacts.display;
+            facts.counter = retrFacts.counter;
+            document.getElementById("factDisplay").innerHTML = facts.display;
+        }*/
+    }
     
     </script>
 
     <button onclick="getFact()">New Cat Fact!</button>
+    <button onclick="retrieve()">Retrieve Old Facts!</button>
     <div id="factDisplay"></div>
 </html>

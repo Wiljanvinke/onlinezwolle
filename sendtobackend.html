@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <input type="text" id="voornaam">
+        <input type="text" id="achternaam">
+        <button onclick="action()">Klik hier</button>
+    </body>
+
+    <script>
+            function action(){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function (){
+                    alert(this.responseText);
+                }
+                xhttp.open("GET","http://nos.nl", true);
+                xhttp.send();
+            }
+    </script>
+</html>
