@@ -21,8 +21,8 @@
                 document.getElementById("factDisplay").innerHTML = facts.display;
                 facts.counter++;
                 var factsJSON = JSON.stringify(facts);
-                console.log(factsJSON);
-                //localStorage.setItem('catFacts', factsJSON);
+                console.log(localStorage);
+                localStorage.setItem('catFacts', factsJSON);
             }
         }
         xhttp.open("GET","https://catfact.ninja/fact", true);
@@ -30,13 +30,13 @@
         xhttp.send();
     }
 
-    function retrieve(){/*
+    function retrieve(){
         if(localStorage.getItem("catFacts")){
             var retrFacts = JSON.parse(localStorage.getItem("catFacts"));
             facts.display = retrFacts.display;
             facts.counter = retrFacts.counter;
             document.getElementById("factDisplay").innerHTML = facts.display;
-        }*/
+        }
     }
     
     </script>

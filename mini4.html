@@ -1,0 +1,16 @@
+<html>
+    <button id="buttonA" onclick="doStuff(id)">A</button>
+    <button id="buttonB" onclick="doStuff(id)">B</button>
+    <button id="buttonC" onclick="doStuff(id)">C</button>
+    <button id="buttonD" onclick="doStuff(id)">D</button>
+    <div id="target"></div>
+
+    <script>
+        function doStuff(id){
+            var div = document.createElement("div");
+            console.log(div);
+            div.innerHTML = "U heeft op knop " + document.getElementById(id).innerHTML + " geklikt.";
+            document.getElementById("target").appendChild(div);
+        }
+    </script>
+</html>

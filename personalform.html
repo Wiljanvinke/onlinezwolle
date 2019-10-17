@@ -3,10 +3,12 @@
         <style>
         </style>
         <script>
+            
             function saveData(){
                 let players = [];
                 if(localStorage.playerData){
                     players = JSON.parse(localStorage.getItem("playerData"));
+                    
                 }
                 var player = {};
                 player.firstName = document.getElementById("firstName").value;
